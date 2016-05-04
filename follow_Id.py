@@ -27,6 +27,7 @@ api = tweepy.API(auth)
 #stream = Stream(auth, TweetListener(), secure=True, )
 #t = u"#python" # You can use different hashtags
 #stream.filter(track=[
+pass_criteria = ["software", "java", "developer", "engineer", "Intellij"]
 current_count = 0
 origin_file_name = "/home/ec2-user/twitter/ids_to_follow/ids_0.txt"
 swap_file_name = "/home/ec2-user/twitter/ids_to_follow/ids_0.txt.swap"
@@ -36,16 +37,25 @@ with open(unfollow_file_name, "a") as unfollow_file:
         with open(origin_file_name, "r") as origin_file:
             print datetime.datetime.utcnow()
             for line in origin_file:
-                if current_count < 5: 
-                    print "Following " + line 
-                    api.create_friendship(line)
-                    unfollow_file.write(line)
-                    time.sleep(5)        
+                if current_count < 5:
+                    user = api.get_user(line)
+                    user_info = str(user).lower()
+                    match = False 
+                    for word in pass_criteria:
+                        if word in user_info:
+                            match = True
+                    if match: 
+                        print "Following " + line 
+                        api.create_friendship(line)
+                        unfollow_file.write(line)
+                        current_count= current_count + 1
+                    else :
+                        print "Ignore " + line                    
+                    time.sleep(60)        
                 else:
                     #print "Skipping " + line
                     swap_file.write(line) 
      
-                current_count= current_count + 1
 os.rename(swap_file_name, origin_file_name)
        
      
