@@ -37,21 +37,24 @@ with open(unfollow_file_name, "a") as unfollow_file:
         with open(origin_file_name, "r") as origin_file:
             print datetime.datetime.utcnow()
             for line in origin_file:
-                if current_count < 5:
-                    user = api.get_user(line)
-                    user_info = str(user).lower()
-                    match = False 
-                    for word in pass_criteria:
-                        if word in user_info:
-                            match = True
-                    if match: 
-                        print "Following " + line 
-                        api.create_friendship(line)
-                        unfollow_file.write(line)
-                        current_count= current_count + 1
-                    else :
-                        print "Ignore " + line                    
-                    time.sleep(60)        
+                if current_count < 8:
+                    try:
+                        user = api.get_user(line)
+                        user_info = str(user).lower()
+                        match = False 
+                        for word in pass_criteria:
+                            if word in user_info:
+                                match = True
+                        if match: 
+                            print "Following " + line 
+                            api.create_friendship(line)
+                            unfollow_file.write(line)
+                            current_count= current_count + 1
+                        else :
+                            print "Ignore " + line                    
+                    except Exception:
+                        print "Exception caught, ignore "  + line     
+                    time.sleep(10)       
                 else:
                     #print "Skipping " + line
                     swap_file.write(line) 
