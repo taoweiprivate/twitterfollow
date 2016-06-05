@@ -29,9 +29,9 @@ api = tweepy.API(auth)
 #stream.filter(track=[
 pass_criteria = ["software", "java", "developer", "engineer", "Intellij"]
 current_count = 0
-origin_file_name = "/home/ec2-user/twitter/ids_to_follow/ids_0.txt"
-swap_file_name = "/home/ec2-user/twitter/ids_to_follow/ids_0.txt.swap"
-unfollow_file_name = "/home/ec2-user/twitter/ids_to_unfollow/ids_0.txt"
+origin_file_name = "/home/ec2-user/twitter/udemy_followers/udemy_account_ids_0123.txt"
+swap_file_name = "/home/ec2-user/twitter/udemy_followers/udemy_account_ids_0.txt.swap"
+unfollow_file_name = "/home/ec2-user/twitter/udmey_ids_to_unfollow/ids_0.txt"
 with open(unfollow_file_name, "a") as unfollow_file:
     with open(swap_file_name, "w+") as swap_file:
         with open(origin_file_name, "r") as origin_file:
@@ -54,7 +54,7 @@ with open(unfollow_file_name, "a") as unfollow_file:
                             print "Ignore " + line                    
                     except Exception:
                         print "Exception caught, ignore "  + line     
-                    time.sleep(60)       
+                    time.sleep(10)       
                 else:
                     #print "Skipping " + line
                     swap_file.write(line) 

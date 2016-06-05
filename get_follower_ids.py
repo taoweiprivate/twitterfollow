@@ -27,13 +27,13 @@ api = tweepy.API(auth)
 #t = u"#python" # You can use different hashtags
 #stream.filter(track=[
 current_batch = 0
-for ids in tweepy.Cursor(api.followers_ids, id = 'intellijidea').pages():
-    file_name = "ids_" + str(current_batch) + ".txt"
+for ids in tweepy.Cursor(api.followers_ids, id = 'jamestopcoder').pages():
+    file_name = "my_account_ids_" + str(current_batch) + ".txt"
     with open(file_name, "a") as myfile:
        for current_id in ids:
            myfile.write(str(current_id)+"\n")
            print current_id
-    time.sleep(60)
+    time.sleep(10)
     current_batch = current_batch + 1
        
      
