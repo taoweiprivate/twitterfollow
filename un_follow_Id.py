@@ -29,24 +29,31 @@ api = tweepy.API(auth)
 #stream.filter(track=[
 #pass_criteria = ["software", "java", "developer", "engineer", "Intellij"]
 current_count = 0
-origin_file_name = "/home/ec2-user/twitter/my_current_follower/my_account_ids_0.txt"
-swap_file_name = "/home/ec2-user/twitter/my_current_follower/my_account_ids_0.txt.swap"
+origin_file_name = "/home/ec2-user/twitter/my_current_following/my_following_ids_0.txt"
+swap_file_name = "/home/ec2-user/twitter/my_current_following/my_following_ids_0.txt.swap"
 with open(swap_file_name, "w+") as swap_file:
     with open(origin_file_name, "r") as origin_file:
         print datetime.datetime.utcnow()
         for line in origin_file:
-            if current_count < 9:
+            if current_count < 10:
                 try:
+                    print line
                     user = api.get_user(line)
-                    if match: 
-                        print "Following " + line 
-                        api.create_friendship(line)
-                        unfollow_file.write(line)
-                        current_count= current_count + 1
+                    print "Number of followers: "
+                    print  user.followers_count
+                    print api.show_friendship(target_id=line)[0] 
+                    if user.followers_count > 1000:
+                        print "Ignore..." 
+                    elif api.show_friendship(target_id=line)[0].followed_by:
+                        print "Friends, ingore.." 
                     else :
-                        print "Ignore " + line                    
-                except Exception:
-                    print "Exception caught, ignore "  + line     
+                        current_count= current_count + 1
+                        print current_count
+                        print "destory friendship " + line
+                        api.destroy_friendship(line)                 
+                except Exception,e:
+                    print "Exception caught, ignore "  + line
+                    print str(e)  
                 time.sleep(10)       
             else:
                     #print "Skipping " + line

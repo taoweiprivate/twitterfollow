@@ -27,7 +27,7 @@ api = tweepy.API(auth)
 #stream = Stream(auth, TweetListener(), secure=True, )
 #t = u"#python" # You can use different hashtags
 #stream.filter(track=[
-pass_criteria = ["software", "java", "developer", "engineer", "Intellij"]
+pass_criteria = ["docker", "software", "java", "developer", "engineer", "Intellij"]
 current_count = 0
 origin_file_name = "/home/ec2-user/twitter/udemy_followers/udemy_account_ids_0123.txt"
 swap_file_name = "/home/ec2-user/twitter/udemy_followers/udemy_account_ids_0.txt.swap"
