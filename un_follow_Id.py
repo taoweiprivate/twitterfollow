@@ -35,7 +35,7 @@ with open(swap_file_name, "w+") as swap_file:
     with open(origin_file_name, "r") as origin_file:
         print datetime.datetime.utcnow()
         for line in origin_file:
-            if current_count < 10:
+            if current_count < 11:
                 try:
                     print line
                     user = api.get_user(line)

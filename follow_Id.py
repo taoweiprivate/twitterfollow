@@ -37,10 +37,11 @@ with open(unfollow_file_name, "a") as unfollow_file:
         with open(origin_file_name, "r") as origin_file:
             print datetime.datetime.utcnow()
             for line in origin_file:
-                if current_count < 9:
+                if current_count < 8:
                     try:
                         user = api.get_user(line)
                         user_info = str(user).lower()
+                        print user_info
                         match = False 
                         for word in pass_criteria:
                             if word in user_info:
