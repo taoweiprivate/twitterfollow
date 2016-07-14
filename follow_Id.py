@@ -48,11 +48,11 @@ with open(unfollow_file_name, "a") as unfollow_file:
                                 match = True
                         if match: 
                             print "Following " + line 
-                            #api.create_friendship(line)
-                            statuses = api.user_timeline(user_id=line, count=1)
-                            if len(statuses) >= 1:
-                               print "Liking " + statuses[0].text
-                               statuses[0].favorite()
+                            api.create_friendship(line)
+                            #statuses = api.user_timeline(user_id=line, count=1)
+                            #if len(statuses) >= 1:
+                            #   print "Liking " + statuses[0].text
+                            #   statuses[0].favorite()
                                #api.create_favorite(statuses[0])
                             unfollow_file.write(line)
                             current_count= current_count + 1
